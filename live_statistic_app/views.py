@@ -11,11 +11,9 @@ from rest_framework import status
 def create_session_and_customer_statistic(request):
     if request.method == 'POST':
         data = request.data
-        # Add a field to specify the type
         statistic_type = data.get('statistic_type')
 
         if statistic_type == 'session':
-            # Create a session statistic
             session_serializer = SessionOverallStatisticSerializer(data=data)
             if session_serializer.is_valid():
                 session_serializer.save()
@@ -24,7 +22,6 @@ def create_session_and_customer_statistic(request):
                 return Response(session_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif statistic_type == 'customer':
-            # Create a customer statistic
             customer_serializer = CustomerOverallStatisticSerializer(data=data)
             if customer_serializer.is_valid():
                 customer_serializer.save()
